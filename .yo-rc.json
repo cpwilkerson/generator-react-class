@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "Christian Wilkerson",
+      "authorEmail": "cpwilkerson72@gmail.com",
+      "authorUrl": ""
+    }
+  }
+}

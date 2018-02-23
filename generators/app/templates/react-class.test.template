@@ -1,0 +1,7 @@
+import {{{class-name}}} from './{{file-name}}.js';
+
+describe('{{class-name}} testing', () => {
+  it('renders', () => {
+    
+  });
+});

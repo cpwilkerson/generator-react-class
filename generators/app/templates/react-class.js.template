@@ -1,0 +1,51 @@
+import React, {Component} from 'react';
+import {withRouter} from 'react-router-dom';
+import './{{file-name}}.scss';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+
+/**
+ * {{description}}
+ */
+class {{class-name}} extends Component {
+  constructor (props) {
+    super(props);
+
+    this.state = {};
+  }
+
+  // componentDidMount () {
+  //   // Code to run on Browser mounting
+  // }
+
+  render () {
+    <div className="{{file-name}}-wrapper">
+      {{class-name}} lives!
+    </div>
+  }
+}
+
+{{class-name}}.propTypes = {};
+
+/**
+ * mapStateToProps maps the application state to component props
+ * @param {*} state application state
+ * @returns {object} mapped props
+ */
+function mapStateToProps (state) {
+  return {};
+}
+
+/**
+ * maps the redux store to the object props
+ * @param {*} dispatch redux store
+ * @returns {object} function/props object
+ */
+function mapDispatchToProps (dispatch) {
+  return {};
+}
+
+export default withRouter(connect(mapStateToProps,
+                                  mapDispatchToProps)({{class-name}}));
+
+export {{{class-name}}};
