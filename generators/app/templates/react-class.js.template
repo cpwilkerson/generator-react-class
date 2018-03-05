@@ -19,9 +19,11 @@ class {{class-name}} extends Component {
   // }
 
   render () {
-    <div className="{{file-name}}-wrapper">
-      {{class-name}} lives!
-    </div>
+    return (
+      <div className="{{file-name}}-wrapper">
+        {{class-name}} lives!
+      </div>
+    );
   }
 }
 
