@@ -3,6 +3,7 @@ const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
 
+/* eslint-disable no-underscore-dangle */
 module.exports = class extends Generator {
   constructor (args, opts) {
     super(args, opts);
@@ -25,7 +26,7 @@ module.exports = class extends Generator {
   prompting () {
     // Have Yeoman greet the user.
     this.log(yosay('Welcome to the superior ' +
-                   `${chalk.red('generator-react-class')} generator!`
+                   `${chalk.red('React Class and/or App')} generator!`
     ));
 
     const prompts = [{
@@ -45,18 +46,33 @@ module.exports = class extends Generator {
       name: 'description',
       message: 'How about a short description for the component?',
       default: 'My best reactjs component ever!'
+    },
+    {
+      type: 'input',
+      name: 'app',
+      message: 'Need an app wrapped around your new component? (Y)es/(N)o',
+      default: 'N'
+    },
+    {
+      type: 'input',
+      name: 'author',
+      message: 'Who is the author of this app?',
+      default: 'webappsteam@esri.com',
+      when: (answers) => answers.app.search(/y/i) > -1
     }
   ];
 
     return this.prompt(prompts).then((props) => {
       // To access props later use this.props.someAnswer;
+
       this.props = props;
     });
   }
 
-  writing () {
+  _writeReactClass () {
     const fs = this.fs,
-           props = this.props;
+           props = this.props,
+           appPath = this.props.app.search(/y/i) > -1 ? 'src/client/' : '';
     const rcTemplate = fs.read(this.templatePath('react-class.js.template'));
     const sscsPlate = fs.read(this.templatePath('react-class.scss.template'));
     const jestPlate = fs.read(this.templatePath('react-class.test.template'));
@@ -76,14 +92,90 @@ module.exports = class extends Generator {
                            replace(/\{\{file-name\}\}/g, props.fileName).
                            replace(/\{\{description\}\}/g, props.description);
 
-    fs.write(this.destinationPath(`${this.props.fileName}.js`), rcClassFile);
-    fs.write(this.destinationPath(`${this.props.fileName}.scss`), rcSassFile);
-    fs.write(this.destinationPath(`${this.props.fileName}.test.js`),
+    fs.write(this.destinationPath(`${appPath}${props.fileName}.js`),
+             rcClassFile);
+    fs.write(this.destinationPath(`${appPath}${props.fileName}.scss`),
+             rcSassFile);
+    fs.write(this.destinationPath(`${appPath}${props.fileName}.test.js`),
              rcJestFile);
+
   }
 
-  // install () {
-  //   // this.installDependencies(); // runs npm and bower
-  //   this.npmInstall();
-  // }
+  _writeReactApp () {
+    const fs = this.fs,
+           props = this.props;
+    const pkgJsonPlate = fs.read(this.templatePath('package.json.template'));
+    const readmePlate = fs.read(this.templatePath('readme.md.template'));
+    const appPlate = fs.read(this.templatePath('app.js.template'));
+
+    const pkgJson = pkgJsonPlate.replace(/\{\{file-name\}\}/g, props.fileName).
+                                 replace(/\{\{author\}\}/g, props.author);
+    const readme = readmePlate.replace(/\{\{class-name\}\}/g, props.className);
+    const app = appPlate.replace(/\{\{class-name\}\}/g, props.className).
+                         replace(/\{\{file-name\}\}/g, props.fileName);
+
+    fs.write(this.destinationPath('package.json'), pkgJson);
+    fs.write(this.destinationPath('README.md'), readme);
+    fs.write(this.destinationPath('src/client/app.js'), app);
+  }
+
+  _copyFiles () {
+    const fs = this.fs;
+
+    fs.copy(this.templatePath('copies/.*'), this.destinationPath('./'));
+    fs.copy(this.templatePath('copies/*'), this.destinationPath('./'));
+    fs.copy(this.templatePath('copies/src/**/*'), this.destinationPath('src/'));
+  }
+
+  writing () {
+    if (this.props.app.search(/y/i) > -1) {
+      this.log(chalk.magenta('Create a react/redux/ssr app here for ' +
+                             `${chalk.cyan.underline(this.props.author)}.`));
+      this._writeReactApp();
+      this._copyFiles();
+    }
+
+    this._writeReactClass();
+  }
+
+  install () {
+    // this.installDependencies(); // runs npm and bower
+    if (this.props.app.search(/y/i) > -1) {
+      this.npmInstall(['body-parser',
+                       'chalk',
+                       'debug',
+                       'express',
+                       'isomorphic-fetch',
+                       'prop-types',
+                       'react',
+                       'react-dom',
+                       'react-redux',
+                       'react-router-dom',
+                       'redux',
+                       'redux-devtools-extension',
+                       'redux-thunk',
+                       'serialize-javascript'], {'save': true});
+
+      this.npmInstall(['babel-cli',
+                       'babel-loader',
+                       'babel-plugin-react-css-modules',
+                       'babel-preset-env',
+                       'babel-preset-react',
+                       'babel-register',
+                       'css-loader',
+                       'eslint',
+                       'eslint-plugin-jest',
+                       'eslint-plugin-react',
+                       'extract-text-webpack-plugin',
+                       'file-loader',
+                       'node-sass',
+                       'postcss-loader',
+                       'sass-loader',
+                       'style-loader',
+                       'webpack',
+                       'webpack-cli'], {'save-dev': true});
+    }
+  }
 };
+
+/* eslint-enable no-underscore-dangle */

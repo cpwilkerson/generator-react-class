@@ -1,0 +1,30 @@
+{
+  "name": "{{file-name}}-app",
+  "version": "1.0.0",
+  "description": "Basic react redux server side rendered web app for testing {{class-name}}",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo test",
+    "devpack": "webpack --mode development",
+    "dev": "npm run devpack && npm start",
+    "start": "node dist/server/server.js"
+  },
+  "babel": {
+    "presets": [
+      "env",
+      "react"
+    ],
+    "plugins": [
+      ["react-css-modules"]
+    ],
+    "sourceMaps": true,
+    "retainLines": true
+  },
+  "keywords": [
+    "react",
+    "redux",
+    "isomorphic"
+  ],
+  "author": "{{author}}",
+  "license": "ISC"
+}
