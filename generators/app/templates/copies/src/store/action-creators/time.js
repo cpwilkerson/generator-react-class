@@ -1,5 +1,4 @@
 import {actions} from '../actions';
-import fetch from 'isomorphic-fetch';
 
 /**
  * Function for dispatching a time request to the redux store

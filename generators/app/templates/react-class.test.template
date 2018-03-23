@@ -1,7 +1,14 @@
 import {{{class-name}}} from './{{file-name}}.js';
+import {shallow, configure} from 'enzyme';
+import React from 'react';
+import Adapter from 'enzyme-adapter-react-16';
+
+configure({adapter: new Adapter()});
 
 describe('{{class-name}} testing', () => {
   it('renders', () => {
-    
+    const wrapper = shallow(<{{class-name}} />);
+
+    expect(wrapper.find('.{{file-name}}-wrapper')).toHaveLength(1);
   });
 });

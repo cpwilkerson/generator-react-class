@@ -8,7 +8,7 @@ import {actions} from './actions';
  * @param {object} action redux action
  * @returns {object} state
  */
-export default function reducer (state = {}, action) {
+export default function reducer (state, action) {
 
   switch (action.type) {
     case actions.GETTING_TIME:
@@ -28,9 +28,7 @@ export default function reducer (state = {}, action) {
                              persons: state.persons.concat([action.person])
                             });
     case actions.ERROR:
-      console.error('Error occurred', {error: action.error}); // eslint-disable-line
-
-      return state;
+      return Object.assign({}, state, {error: action.error});
     default:
       return state;
   }

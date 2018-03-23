@@ -45,7 +45,8 @@ module.exports = class extends Generator {
       type: 'input',
       name: 'description',
       message: 'How about a short description for the component?',
-      default: 'My best reactjs component ever!'
+      default: (answers) =>
+                          `My best ${answers.className} reactjs component ever!`
     },
     {
       type: 'input',
@@ -157,19 +158,24 @@ module.exports = class extends Generator {
                        'serialize-javascript'], {'save': true});
 
       this.npmInstall(['babel-cli',
+                       'babel-jest',
                        'babel-loader',
                        'babel-plugin-react-css-modules',
                        'babel-preset-env',
                        'babel-preset-react',
                        'babel-register',
                        'css-loader',
+                       'enzyme',
                        'eslint',
                        'eslint-plugin-jest',
                        'eslint-plugin-react',
                        'extract-text-webpack-plugin',
                        'file-loader',
+                       'jest',
+                       'jest-fetch-mock',
                        'node-sass',
                        'postcss-loader',
+                       'enzyme-adapter-react-16',
                        'sass-loader',
                        'style-loader',
                        'webpack',

@@ -34,19 +34,22 @@ class PersonPost extends Component {
       <div className="person-post-wrapper">
         <div>
           Name:
-          <input ref={(input) => {
+          <input id="person-name"
+                 ref={(input) => {
                       this.personNameInput = input;
                     }}
                 type="text" />
         </div>
         <div>
           Age:
-          <input ref={(input) => {
+          <input id="person-age"
+                 ref={(input) => {
                       this.personAgeInput = input;
                      }}
                  type="number" />
         </div>
-        <button onClick={this.handleClick.bind(this)}>
+        <button id="btn-person-post"
+                onClick={this.handleClick.bind(this)}>
           Post Person
         </button>
       </div>
@@ -61,7 +64,7 @@ PersonPost.propTypes = {postPerson: PropTypes.func.isRequired};
  * @param {*} state application state
  * @returns {object} mapped props
  */
-function mapStateToProps (state) {
+function mapStateToProps () {
   return {};
 }
 
