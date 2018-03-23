@@ -178,6 +178,7 @@ module.exports = class extends Generator {
                        'enzyme-adapter-react-16',
                        'sass-loader',
                        'style-loader',
+                       'supertest',
                        'webpack',
                        'webpack-cli'], {'save-dev': true});
     }

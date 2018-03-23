@@ -82,16 +82,11 @@ app.post('/postPerson', (req, res) => {
 
 app.get('*', (req, res) => {
   debug('1 star route hit - path', {path: req.path});
-  fs.exists(req.path, (exists) => {
-    if (exists) {
-      res.send(`${req.path} exists`);
-    } else {
-      res.send(starRoute(`${req.path} not found`));
-    }
-  });
+
+  res.send(starRoute(`${req.path} not found`));
 });
 
-app.listen(3000, () => {
+const server = app.listen(3000, () => {
   process.stdout.write(chalk.blueBright(`process path ${process.cwd()}\n`));
   process.stdout.write(chalk.yellow('public directory is '));
   process.stdout.write(chalk.yellow.bold(`${path.join(__dirname,
@@ -99,3 +94,5 @@ app.listen(3000, () => {
   process.stdout.write(chalk.green('listening on port: '));
   process.stdout.write(chalk.green.bold('3000\n'));
 });
+
+module.exports = server;
