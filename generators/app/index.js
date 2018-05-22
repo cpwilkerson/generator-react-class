@@ -8,6 +8,11 @@ module.exports = class extends Generator {
   constructor (args, opts) {
     super(args, opts);
 
+    this.props = {
+      clientOnly: 'N',
+      completeApp: 'Y'
+    };
+
     this.option('className', {
       desc: 'Name of the react class',
       alias: 'c',
@@ -53,6 +58,21 @@ module.exports = class extends Generator {
       name: 'app',
       message: 'Need an app wrapped around your new component? (Y)es/(N)o',
       default: 'N'
+    },
+    {
+      type: 'input',
+      name: 'clientOnly',
+      message: 'Is this a client only app? (Y)es/(N)o',
+      default: 'N',
+      when: (answers) => answers.app.search(/y/i) > -1
+    },
+    {
+      type: 'input',
+      name: 'completeApp',
+      message: 'Does this app need a package.json,' +
+               'and other config files? (Y)es/(N)o',
+      default: 'Y',
+      when: (answers) => answers.app.search(/y/i) > -1
     },
     {
       type: 'input',
@@ -104,10 +124,10 @@ module.exports = class extends Generator {
 
   _writeReactApp () {
     const fs = this.fs,
-           props = this.props;
-    const pkgJsonPlate = fs.read(this.templatePath('package.json.template'));
-    const readmePlate = fs.read(this.templatePath('readme.md.template'));
-    const appPlate = fs.read(this.templatePath('app.js.template'));
+          props = this.props,
+          pkgJsonPlate = fs.read(this.templatePath('package.json.template')),
+          readmePlate = fs.read(this.templatePath('readme.md.template')),
+          appPlate = fs.read(this.templatePath('app.js.template'));
 
     const pkgJson = pkgJsonPlate.replace(/\{\{file-name\}\}/g, props.fileName).
                                  replace(/\{\{author\}\}/g, props.author);
@@ -115,17 +135,29 @@ module.exports = class extends Generator {
     const app = appPlate.replace(/\{\{class-name\}\}/g, props.className).
                          replace(/\{\{file-name\}\}/g, props.fileName);
 
-    fs.write(this.destinationPath('package.json'), pkgJson);
-    fs.write(this.destinationPath('README.md'), readme);
+    if (props.completeApp.search(/y/i) > -1) {
+      fs.write(this.destinationPath('package.json'), pkgJson);
+      fs.write(this.destinationPath('README.md'), readme);
+    }
     fs.write(this.destinationPath('src/client/app.js'), app);
   }
 
   _copyFiles () {
     const fs = this.fs;
 
-    fs.copy(this.templatePath('copies/.*'), this.destinationPath('./'));
-    fs.copy(this.templatePath('copies/*'), this.destinationPath('./'));
-    fs.copy(this.templatePath('copies/src/**/*'), this.destinationPath('src/'));
+    if (this.props.clientOnly.search(/y/i) > -1) {
+      fs.copy(this.templatePath('copies/src/client/*'),
+      this.destinationPath('src/client'));
+      fs.copy(this.templatePath('copies/src/store/**/*'),
+      this.destinationPath('src/store'));
+    } else {
+      fs.copy(this.templatePath('copies/vscode/launch.json'),
+                                this.destinationPath('./.vscode/launch.json'));
+      fs.copy(this.templatePath('copies/.*'), this.destinationPath('./'));
+      fs.copy(this.templatePath('copies/*'), this.destinationPath('./'));
+      fs.copy(this.templatePath('copies/src/**/*'),
+                                this.destinationPath('src/'));
+    }
   }
 
   writing () {
@@ -141,8 +173,13 @@ module.exports = class extends Generator {
 
   install () {
     // this.installDependencies(); // runs npm and bower
+    if (this.props.clientOnly && this.props.clientOnly.search(/y/i) > -1) {
+      return;
+    }
+
     if (this.props.app.search(/y/i) > -1) {
-      this.npmInstall(['body-parser',
+      this.npmInstall(['babel-polyfill',
+                       'body-parser',
                        'chalk',
                        'debug',
                        'express',
@@ -161,6 +198,7 @@ module.exports = class extends Generator {
                        'babel-jest',
                        'babel-loader',
                        'babel-plugin-react-css-modules',
+                       'babel-plugin-sass-export',
                        'babel-preset-env',
                        'babel-preset-react',
                        'babel-register',
