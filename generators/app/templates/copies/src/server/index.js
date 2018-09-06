@@ -95,4 +95,4 @@ const server = app.listen(3000, () => {
   process.stdout.write(chalk.green.bold('3000\n'));
 });
 
-module.exports = server;
+export default server;

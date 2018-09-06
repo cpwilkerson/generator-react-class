@@ -178,7 +178,7 @@ module.exports = class extends Generator {
     }
 
     if (this.props.app.search(/y/i) > -1) {
-      this.npmInstall(['babel-polyfill',
+      this.npmInstall(['@babel/polyfill',
                        'body-parser',
                        'chalk',
                        'debug',
@@ -194,14 +194,13 @@ module.exports = class extends Generator {
                        'redux-thunk',
                        'serialize-javascript'], {'save': true});
 
-      this.npmInstall(['babel-cli',
-                       'babel-jest',
+      this.npmInstall(['@babel/core',
+                       '@babel/cli',
                        'babel-loader',
                        'babel-plugin-react-css-modules',
-                       'babel-plugin-sass-export',
-                       'babel-preset-env',
-                       'babel-preset-react',
-                       'babel-register',
+                       '@babel/preset-env',
+                       '@babel/preset-react',
+                       '@babel/register',
                        'css-loader',
                        'enzyme',
                        'eslint',

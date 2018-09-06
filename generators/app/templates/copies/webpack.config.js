@@ -13,7 +13,7 @@ const browserConfig = {
         test: /js$/,
         exclude: /(node_modules)/,
         loader: 'babel-loader',
-        query: {presets: ['react']}
+        query: {presets: ['@babel/preset-react']}
       },
       {
         test: /\.scss$/,
@@ -33,12 +33,13 @@ const browserConfig = {
 };
 
 const serverConfig = {
-  entry: './src/server/index.js',
+  entry: {
+    server: ['@babel/polyfill', './src/server/index.js']
+  },
   target: 'node',
   output: {
     path: __dirname,
-    filename: './dist/server/server.js',
-    libraryTarget: 'commonjs2'
+    filename: './dist/server/server.js'
   },
   devtool: 'cheap-module-source-map',
   stats: {warnings: false},
@@ -64,7 +65,7 @@ const serverConfig = {
         test: /js$/,
         exclude: /(node_modules)/,
         loader: 'babel-loader',
-        query: {presets: ['react']}
+        query: {presets: ['@babel/preset-react']}
       }
     ]
   }
