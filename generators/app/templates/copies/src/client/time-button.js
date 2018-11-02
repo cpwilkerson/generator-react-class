@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
-import './time-button.scss';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {getTime} from '../store/action-creators/time';

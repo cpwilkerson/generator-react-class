@@ -48,6 +48,7 @@ app.get('/', (req, res) => {
                 <script>
                   window.__initialData__ = ${serialize(initialData)}
                 </script>
+                <link rel="stylesheet" href="./public/css/app.css">
               </head>
               <body>
                 <div id="react-app">${markup}</div>

@@ -130,6 +130,7 @@ module.exports = class extends Generator {
           appPlate = fs.read(this.templatePath('app.js.template'));
 
     const pkgJson = pkgJsonPlate.replace(/\{\{file-name\}\}/g, props.fileName).
+                                 replace(/\{\{class-name\}\}/g, props.className).
                                  replace(/\{\{author\}\}/g, props.author);
     const readme = readmePlate.replace(/\{\{class-name\}\}/g, props.className);
     const app = appPlate.replace(/\{\{class-name\}\}/g, props.className).
@@ -157,6 +158,8 @@ module.exports = class extends Generator {
       fs.copy(this.templatePath('copies/*'), this.destinationPath('./'));
       fs.copy(this.templatePath('copies/src/**/*'),
                                 this.destinationPath('src/'));
+      fs.copy(this.templatePath('copies/gulp-tasks/*'),
+                                this.destinationPath('./gulp-tasks/'));
     }
   }
 
@@ -201,20 +204,26 @@ module.exports = class extends Generator {
                        '@babel/preset-env',
                        '@babel/preset-react',
                        '@babel/register',
-                       'css-loader',
                        'enzyme',
                        'eslint',
                        'eslint-plugin-jest',
                        'eslint-plugin-react',
                        'extract-text-webpack-plugin',
                        'file-loader',
+                       'gulp',
+                       'gulp-eslint',
+                       'gulp-logger',
+                       'gulp-plumber',
+                       'gulp-run',
+                       'gulp-sass',
+                       'gulp-sass-glob',
+                       'gulp-sourcemaps',
+                       'gulp-watch',
                        'jest',
                        'jest-fetch-mock',
                        'node-sass',
-                       'postcss-loader',
+                       'require-dir',
                        'enzyme-adapter-react-16',
-                       'sass-loader',
-                       'style-loader',
                        'supertest',
                        'webpack',
                        'webpack-cli'], {'save-dev': true});

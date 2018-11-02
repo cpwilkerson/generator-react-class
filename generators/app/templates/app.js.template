@@ -1,7 +1,6 @@
 import '@babel/polyfill';
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
-import './app.scss';
 // import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import TimeButton from './time-button';

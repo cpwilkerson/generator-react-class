@@ -1,8 +1,7 @@
 .app-wrapper {
   position: relative;
   font-family: "Avenir Next W01","Avenir Next W00","Avenir Next","Avenir","Helvetica Neue","Helvetica","Arial","sans-serif";
-  border: dashed 3px seagreen;
-  width: 50%;
-  height: 50%;
-  overflow: scroll;
+  border: solid 1px seagreen;
+  box-sizing: border-box;
+  width: 100vw;
 }

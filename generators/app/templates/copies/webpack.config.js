@@ -14,19 +14,6 @@ const browserConfig = {
         exclude: /(node_modules)/,
         loader: 'babel-loader',
         query: {presets: ['@babel/preset-react']}
-      },
-      {
-        test: /\.scss$/,
-        use: [{
-          // creates style nodes from JS strings
-          loader: 'style-loader'
-        }, {
-          // translates CSS into CommonJS
-          loader: 'css-loader'
-        }, {
-          // compiles Sass to CSS
-          loader: 'sass-loader'
-        }]
       }
     ]
   }
@@ -53,13 +40,6 @@ const serverConfig = {
           publicPath: (url) => url.replace(/public/, ''),
           emit: false
         }
-      },
-      {
-        test: [/\.scss$/, /\.css$/],
-        use: [
-          {loader: 'css-loader/locals'},
-          {loader: 'sass-loader'}
-        ]
       },
       {
         test: /js$/,

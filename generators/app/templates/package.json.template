@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest src --coverage && open ./coverage/lcov-report/index.html",
     "devpack": "webpack --mode development",
-    "dev": "npm run devpack && npm start",
+    "dev": "npm run build && npm start",
+    "build": "gulp build && npm run devpack",
     "start": "node dist/server/server.js"
   },
   "babel": {
