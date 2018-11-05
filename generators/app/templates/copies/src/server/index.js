@@ -40,21 +40,16 @@ app.get('/', (req, res) => {
               </Provider>
             );
 
-  res.send(`<html>
-              <head>
-                <meta name="viewport"
-                      content="width=device-width, 
-                      initial-scale=1.0">
-                <script>
-                  window.__initialData__ = ${serialize(initialData)}
-                </script>
-                <link rel="stylesheet" href="./public/css/app.css">
-              </head>
-              <body>
-                <div id="react-app">${markup}</div>
-                <script src="./public/js/app-bundle.js"></script>
-              </body>
-            </html>`);
+  fs.readFile('./dist/server/index.html', (err, data) => {
+    if (err) {
+      res.statusCode = 500;
+      res.send(`server error - ${err}`);
+    } else {
+      res.send(data.toString('utf8').
+        replace('{{markup}}', markup).
+        replace('{{initialData}}', serialize(initialData)));
+    }
+  });
 });
 
 app.get('/getTime', (req, res) => {
