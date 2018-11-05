@@ -204,6 +204,7 @@ module.exports = class extends Generator {
                        '@babel/preset-env',
                        '@babel/preset-react',
                        '@babel/register',
+                       'cross-env',
                        'enzyme',
                        'eslint',
                        'eslint-plugin-jest',

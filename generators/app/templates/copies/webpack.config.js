@@ -30,6 +30,7 @@ const serverConfig = {
   },
   devtool: 'cheap-module-source-map',
   stats: {warnings: false},
+  optimization: {nodeEnv: false},
   module: {
     rules: [
       {

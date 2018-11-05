@@ -6,8 +6,11 @@
   "scripts": {
     "test": "jest src --coverage && open ./coverage/lcov-report/index.html",
     "devpack": "webpack --mode development",
-    "dev": "npm run build && npm start",
-    "build": "gulp build && npm run devpack",
+    "dev": "npm run devpack && gulp build && npm start",
+    "build": "cross-env NODE_ENV=production webpack && gulp build",
+    "build-stg": "cross-env NODE_ENV=staging webpack && gulp build",
+    "build-dev": "cross-env NODE_ENV=development webpack --mode development && gulp build",
+    "prod": "cross-env NODE_ENV=production sudo pm2 start dist/server/server.js",
     "start": "node dist/server/server.js"
   },
   "babel": {
