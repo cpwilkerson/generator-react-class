@@ -16,6 +16,11 @@ Then generate your new project:
 yo react-class
 ```
 
+### NODEMON Known Issue
+
+In the generated node app, there is a problem in the ```npm run dev``` script
+that currently requires you to run ```npm run dev``` twice.
+
 ## Getting To Know Yeoman
 
  * Yeoman has a heart of gold.
