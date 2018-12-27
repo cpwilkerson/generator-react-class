@@ -16,8 +16,7 @@ const pkg = require('../package.json');
  * @return {void}
  */
 function compileScss (sourceFolder, destFolder) {
-  gulp.src(`${sourceFolder}client/app.scss`, {base: sourceFolder}).
-    pipe(plumber()).
+  gulp.src(`${sourceFolder}/app.scss`).
     pipe(logger({
       before: `Starting compileScss - ${new Date()}`,
       after: `compileScss complete - ${new Date()}`,
@@ -42,7 +41,7 @@ function compileScss (sourceFolder, destFolder) {
  * @return {void}
  */
 function buildScss () {
-  compileScss('./src/', './dist/client/css/');
+  compileScss('./src/client', './dist/client/css/');
 }
 
 /**
@@ -53,8 +52,7 @@ function watchScss () {
   const watcher = gulp.watch(['./src/']);
 
   watcher.on('change', () => {
-    compileScss('./src/', './dist/client/css/');
-    // gulp.src(path.path).pipe(gulp.dest('./dist/server/'));
+    compileScss('./src/client', './dist/client/css/');
   });
 }
 

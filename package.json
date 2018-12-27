@@ -1,6 +1,6 @@
 {
   "name": "generator-react-class",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description":
     "Creates a react class js file, a test js file, and a sass file.",
   "homepage": "",
@@ -40,7 +40,6 @@
     "coverageDirectory": "./coverage"
   },
   "scripts": {
-    "prepublish": "nsp check",
     "pretest": "eslint .",
     "precommit": "lint-staged",
     "test": "jest"

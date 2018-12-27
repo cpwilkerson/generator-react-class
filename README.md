@@ -16,7 +16,20 @@ Then generate your new project:
 yo react-class
 ```
 
-### NODEMON Known Issue
+## Running your project
+
+You will need to install gulpjs, and nodemon globally.
+```bash
+npm install -g gulp
+npm install -g nodemon
+```
+
+Running in development mode
+```bash
+npm run dev
+```
+
+# NODEMON Known Issue
 
 In the generated node app, there is a problem in the ```npm run dev``` script
 that currently requires you to run ```npm run dev``` twice.

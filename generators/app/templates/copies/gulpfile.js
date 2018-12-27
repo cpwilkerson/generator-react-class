@@ -7,7 +7,7 @@ const {copyIndex, watchIndex} = require('./gulp-tasks/file-tasks');
  * @return {void}
  */
 function build (done) {
-  buildScss('./src/', './dist/client/css/');
+  buildScss();
   copyIndex();
   done();
 }
