@@ -1,4 +1,4 @@
-const {buildScss} = require('./gulp-tasks/scss-compile');
+const {buildScss, watchScss} = require('./gulp-tasks/scss-compile');
 const {copyIndex, watchIndex} = require('./gulp-tasks/file-tasks');
 
 /**
@@ -19,6 +19,7 @@ function build (done) {
  */
 function watch (done) {
   watchIndex();
+  watchScss();
   done();
 }
 

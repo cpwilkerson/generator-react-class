@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest src --coverage && open ./coverage/lcov-report/index.html",
-    "devpack": "webpack --mode development --watch",
+    "devpack": "webpack --mode development && webpack --mode development --watch",
     "dev": "gulp build && npm run devpack & gulp watch & npm run start-dev",
     "build": "cross-env NODE_ENV=production webpack && gulp build",
     "build-stg": "cross-env NODE_ENV=staging webpack && gulp build",

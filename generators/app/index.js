@@ -78,7 +78,7 @@ module.exports = class extends Generator {
       type: 'input',
       name: 'author',
       message: 'Who is the author of this app?',
-      default: 'webappsteam@esri.com',
+      default: 'some-name@some-domain.com',
       when: (answers) => answers.app.search(/y/i) > -1
     }
   ];
