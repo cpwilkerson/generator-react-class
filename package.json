@@ -1,6 +1,6 @@
 {
   "name": "generator-react-class",
-  "version": "1.0.0",
+  "version": "2.3.0",
   "description":
     "Creates a react class js file, a test js file, and a sass file.",
   "homepage": "",
