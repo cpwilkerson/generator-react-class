@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {getTime} from '../store/action-creators/time';
+import {getTime} from '../../store/action-creators/time';
 
 /**
  * Button to test a rest endpoint

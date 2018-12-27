@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {postPerson} from '../store/action-creators/person';
+import {postPerson} from '../../store/action-creators/person';
 
 
 /**

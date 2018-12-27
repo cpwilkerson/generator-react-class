@@ -20,10 +20,5 @@ function copyIndex () {
   gulp.src('./src/server/index.html').pipe(gulp.dest('./dist/server/'));
 }
 
-gulp.task('watch-index', () => {
-  watchIndex();
-});
-
-gulp.task('copy-index', () => {
-  copyIndex();
-});
+exports.copyIndex = copyIndex;
+exports.watchIndex = watchIndex;

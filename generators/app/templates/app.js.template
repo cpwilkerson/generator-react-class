@@ -3,9 +3,9 @@ import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 // import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import TimeButton from './time-button';
-import PersonPost from './person-post';
-import PersonList from './person-list';
+import TimeButton from './components/time-button';
+import PersonPost from './components/person-post';
+import PersonList from './components/person-list';
 import {{class-name}} from './{{file-name}}';
 
 /**

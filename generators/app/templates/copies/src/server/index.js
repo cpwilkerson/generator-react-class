@@ -75,6 +75,8 @@ app.post('/postPerson', (req, res) => {
   res.send(person);
 });
 
+app.use('/public', express.static('./dist'));
+
 
 app.get('*', (req, res) => {
   debug('1 star route hit - path', {path: req.path});
