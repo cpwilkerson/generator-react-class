@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import TimeButton from './components/time-button';
 import PersonPost from './components/person-post';
 import PersonList from './components/person-list';
-import {{class-name}} from './{{file-name}}';
+import {{class-name}} from './components/{{file-name}}';
 
 /**
  * Root Class for React application
