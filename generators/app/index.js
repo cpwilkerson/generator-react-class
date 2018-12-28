@@ -93,7 +93,7 @@ module.exports = class extends Generator {
   _writeReactClass () {
     const fs = this.fs,
            props = this.props,
-           appPath = this.props.app.search(/y/i) > -1 ? 'src/client/' : '';
+           appPath = this.props.app.search(/y/i) > -1 ? 'src/client/components/' : '';
     const rcTemplate = fs.read(this.templatePath('react-class.js.template'));
     const sscsPlate = fs.read(this.templatePath('react-class.scss.template'));
     const jestPlate = fs.read(this.templatePath('react-class.test.template'));
