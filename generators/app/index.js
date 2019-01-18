@@ -201,6 +201,7 @@ module.exports = class extends Generator {
                        '@babel/cli',
                        'babel-loader',
                        'babel-plugin-react-css-modules',
+                       'babel-core@7.0.0-bridge.0',
                        '@babel/preset-env',
                        '@babel/preset-react',
                        '@babel/register',

@@ -72,6 +72,7 @@ app.post('/postPerson', (req, res) => {
                        ` ${chalk.white(' - sent')}\n`);
   /* eslint-enable no-undefined */
   res.statusCode = 201;
+  res.setHeader('Content-Type', 'application/json');
   res.send(person);
 });
 
@@ -93,4 +94,5 @@ const server = app.listen(3000, () => {
   process.stdout.write(chalk.green.bold('3000\n'));
 });
 
+export {app};
 export default server;
